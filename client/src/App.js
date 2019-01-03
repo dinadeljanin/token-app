@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { abi, bytecode } from "./TokenERC20.json";
 import getWeb3 from "./utils/getWeb3";
-import { Button, Navbar, PageHeader, FormControl, FormGroup, ControlLabel, Grid, Row, Col, Table } from 'react-bootstrap';
+import { Button,Nav, NavItem, Navbar, Alert, PageHeader, FormControl, FormGroup, ControlLabel, Grid, Row, Col, Table } from 'react-bootstrap';
 import "./App.css";
 
 class App extends Component {
@@ -17,6 +17,7 @@ class App extends Component {
     tokenAddress: null,
     isLoading: false,
     isLoaded: false,
+    web3Connect: false
   };
 
   componentDidMount = async () => {
@@ -31,7 +32,7 @@ class App extends Component {
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts });
+      this.setState({ web3, accounts, web3Connect: true });
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -82,16 +83,21 @@ class App extends Component {
   };
 
   render() {
+    const loader = (<div className="lds-dual-ring"></div>);
+    const acceptMetamask = (<div className='accept-metamask-container'><div className="lds-dual-ring"></div><h3>Connecting to metamask</h3><p>If you don't have Metamask. <strong>Please</strong>, download <a target='_blank' href='https://metamask.io/'> MetaMask </a> to use this application.</p></div>);
     if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
+      return acceptMetamask;
     }
-    const loader = (<div className="lds-dual-ring"></div>)
+    const warning = (<Alert bsStyle="danger" style={{'margin': '0'}}>
+      <strong>Please</strong>, download <a target='_blank' href='https://metamask.io/'> MetaMask </a> to use this application.
+</Alert>)
+  
     const tokenInfo = (<div>
-      <Table bordered>
-        <tbody>
+      <Table bordered >
+        <tbody >
           <tr>
-            <th>Token Address</th>
-            <th>{this.state.tokenAddress}</th>
+            <td >Token Address</td>
+            <td>{this.state.tokenAddress}</td>
           </tr>
           <tr>
             <td>Token Symbol</td>
@@ -122,13 +128,32 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Navbar inverse >
+        {!this.state.web3Connect && warning}
+        <Navbar inverse staticTop="true" >
           <Navbar.Header>
             <Navbar.Brand>
-              Token Maker
+              The Blockchain Project
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
+
+          <Nav pullRight>
+            <NavItem eventKey={1}>
+              Create Token
+            </NavItem>
+            <NavItem eventKey={2}>
+              Businesses
+            </NavItem>
+            <NavItem eventKey={3}>
+              Communities
+            </NavItem>
+            <NavItem eventKey={4}>
+              Use Casses
+            </NavItem>
+            <NavItem eventKey={5}>
+              Contact
+            </NavItem>
+          </Nav>
         </Navbar>
         <PageHeader>
           Start making your own token!

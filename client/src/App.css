@@ -48,6 +48,13 @@
   border-color: #fff transparent #fff transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
+
+.accept-metamask-container{
+  text-align: center;
+  background-color: #19ce50;
+  margin-top: 10%;
+}
+
 .grid-container {
   background-color: aqua;
 }
