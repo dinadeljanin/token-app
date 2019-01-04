@@ -1,8 +1,8 @@
 # Project Overview
 
-## Link To SteemPX
+## Link To The Blockchain Project
 
-<!-- [steempx](https://steempx.herokuapp.com/) -->
+[The Blockchain Project](https://theblockchainproject.info/)
 
 ## Project Description
 This is a platform where everyone can create their own erc20 token, there are plenty of reasons to create your own token. Some examples are: ICO, customer reward program, fun, Community currency, etc.
